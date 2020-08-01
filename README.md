@@ -2,7 +2,7 @@
 
 This project aims to create a Responsive 3x3 Matrix with Shuffle & Sort Feature.
 
-Interesting feature is Media Queries and Shuffle Algo.
+Interesting feature is Media Queries and Shuffle Algo. I added another feature of CSS Transition to give some animated effect to Shuffling.
 
 ##### Project Deployed at:
 https://maersk-responsive-3x3-shuffle-sort.netlify.app/
