@@ -3,10 +3,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
 * {
   box-sizing: border-box;
 }
-
 /* Create three equal columns that floats next to each other */
 .column {
    float: left;
@@ -86,8 +86,11 @@
   font-style: italic;
   margin-top: 10px;
 }
+div{
+  transition: all 2s;
+}
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1250px) {
   .column {
     width: 92%;
     height: 50px;
@@ -141,13 +144,11 @@
     margin-right: 33px;
   }
   .button:hover {background-color: #72c3dc}
-
   .button:active {
     background-color: #72c3dc;
     box-shadow: 0 3px #666;
     transform: translateY(3px);
   }
-
   .sort {
     width: 130px;
   }
@@ -181,8 +182,8 @@
 <div class="header"><p>SHUFFLE & SORT</p></div>
 <div class ="block">
   <div class="alignButton">
-      <div style="float: left;"><button class="button" onclick="shuffle();">SHUFFLE</button></div>
-      <div class="shuff-sort"><button class="button sort"  onclick="sort();">SORT</button></div>
+      <div  class="shuff-sort"><button class="button" onclick="shuffle();">SHUFFLE</button><button class="button sort"  onclick="sort();">SORT</button></div>
+
   </div>
   <div class="main">
     <div class="row">
@@ -233,15 +234,16 @@
 
 </body>
 <script>
+  //var h2text = ["First h2", "Second H2"];
   Array.prototype.shuffle = function () {
     let input = this;
     for (let i = input.length - 1; i >= 0; i--) {
 
-      let randomIndex = Math.floor(Math.random() * (i + 1));
-      let itemAtIndex = input[randomIndex];
+    let randomIndex = Math.floor(Math.random() * (i + 1));
+    let itemAtIndex = input[randomIndex];
 
-      input[randomIndex] = input[i];
-      input[i] = itemAtIndex;
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
     }
     return input;
   }
@@ -272,15 +274,34 @@
     document.getElementById("eight-color").style.backgroundColor = tempArray[7][1];
     document.getElementById("nine-color").style.backgroundColor = tempArray[8][1];
     // Change the Number
-    document.getElementById("one").innerHTML = tempArray[0][0];
-    document.getElementById("two").innerHTML = tempArray[1][0];
-    document.getElementById("three").innerHTML = tempArray[2][0];
-    document.getElementById("four").innerHTML = tempArray[3][0];
-    document.getElementById("five").innerHTML = tempArray[4][0];
-    document.getElementById("six").innerHTML = tempArray[5][0];
-    document.getElementById("seven").innerHTML = tempArray[6][0];
-    document.getElementById("eight").innerHTML = tempArray[7][0];
-    document.getElementById("nine").innerHTML = tempArray[8][0];
+    var doTimeout = function(obj,text,timeout,i){
+      setTimeout(function() {
+        obj.style.opacity = 0; //make text temporarily invisible
+        setTimeout(function() {
+          obj.innerHTML = text;
+          obj.style.opacity = 1; //fade back in
+        }, timeout); //this timeout needs to be the same as the transition speed
+      })
+    }
+
+    var idArr = ["one","two","three","four","five","six","seven","eight","nine"];
+    for(var i=0; i<=8;i++){
+        var obj = document.getElementById(idArr[i]);
+        obj.style.transition = "0.5s";
+        obj.style.opacity = 0;
+        var text = tempArray[i][0];
+        var timeout = 500;
+        doTimeout(obj,text,timeout,i);
+    }
+    // document.getElementById("one").innerHTML = tempArray[0][0];
+    // document.getElementById("two").innerHTML = tempArray[1][0];
+    // document.getElementById("three").innerHTML = tempArray[2][0];
+    // document.getElementById("four").innerHTML = tempArray[3][0];
+    // document.getElementById("five").innerHTML = tempArray[4][0];
+    // document.getElementById("six").innerHTML = tempArray[5][0];
+    // document.getElementById("seven").innerHTML = tempArray[6][0];
+    // document.getElementById("eight").innerHTML = tempArray[7][0];
+    // document.getElementById("nine").innerHTML = tempArray[8][0];
   }
   function shuffle(){
     tempArray.shuffle();
